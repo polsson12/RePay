@@ -69,20 +69,53 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSLog(@"Kommer hit...2");
     
-    return [_debts count];
+    return [[_debts objectAtIndex:0] count] + [[_debts objectAtIndex:1] count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Kommer hit...1");
     //NSLog(@"Inne i cell for row at index path");
-    static NSString *cellID = @"cellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    
+    static NSString *cellID = @"UITableViewDetailsCell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    // dequeue a table view cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID
+                                      forIndexPath:indexPath];
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
+    
+    
+    
+    
+    
+    
+    
+    // set its title label (tag #1)
+    UILabel *date = (UILabel *)[cell viewWithTag:1];
+    date.text = @"12/12-14";//[post valueForKey:@"title"];
+    
+    // set its author label (tag #2)
+    UILabel *message = (UILabel *)[cell viewWithTag:2];
+    
+    // set its publication date label (tag #3)
+    UILabel *amount = (UILabel *)[cell viewWithTag:3];
+    
     if(tableView == _debtDetailsTableView){
+        if (indexPath.row < [[_debts objectAtIndex:0] count]) {
+            NSLog(@"indexPath.row : %ld",(long)indexPath.row);
+            date.text = @"12/12-14";
+            message.text = [[[_debts objectAtIndex:0] objectAtIndex:indexPath.row] message];
+            amount.text = [[[[_debts objectAtIndex:0] objectAtIndex:indexPath.row] amount] stringValue];
+            //cell.textLabel.text = [[[_debts objectAtIndex:0] objectAtIndex:indexPath.row] message];
+        }else{
+            NSLog(@"indexPath.row : %ld",(long)indexPath.row);
+            date.text = @"12/12-13";
+            message.text = [[[_debts objectAtIndex:1] objectAtIndex:(indexPath.row%[[_debts objectAtIndex:0] count])] message];
+            amount.text = [[[[_debts objectAtIndex:1] objectAtIndex:(indexPath.row%[[_debts objectAtIndex:0] count])] amount] stringValue];
+            //cell.textLabel.text = [[[_debts objectAtIndex:1] objectAtIndex:(indexPath.row%[[_debts objectAtIndex:0] count])] message];
+
+        }
         
     }
     
