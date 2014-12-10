@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>144B8EA8-0A2F-4708-9738-ED1C7B08B991</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RePay</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BB90D73770F22E638B3348C9D906EC4197007227</key>
+		<string>https://github.com/polsson12/RePay.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RePay.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BB90D73770F22E638B3348C9D906EC4197007227</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/polsson12/RePay.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BB90D73770F22E638B3348C9D906EC4197007227</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BB90D73770F22E638B3348C9D906EC4197007227</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RePay</string>
+		</dict>
+	</array>
+</dict>
+</plist>

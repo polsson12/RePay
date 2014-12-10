@@ -10,8 +10,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "Debt.h"
 
-
+/*
 @interface Debt : NSObject
 @property NSString* fromName;
 @property NSString* fromFbId;
@@ -36,7 +37,7 @@
 }
 
 @end
-
+*/
 
 @interface ShowDebtViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate>
 

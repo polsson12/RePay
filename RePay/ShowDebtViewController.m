@@ -60,15 +60,17 @@
             NSLog(@"Kommer hit.........");
             index = 1;
         }
+        //Find out the name to put as text in the cell
         //If the debt objects toFbId string is not equal to the current user fbId we know that the text in the cell should be toName
-        
-        
-        /*if (![[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:index] objectAtIndex:0] toFbId] isEqualToString:[[PFUser currentUser] objectForKey:@"fbId"]]) {
-            name = [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] objectAtIndex:0] toName];
+        if (![[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:index] objectAtIndex:0] toFbId] isEqualToString:[[PFUser currentUser] objectForKey:@"fbId"]]) {
+            name = [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:index] objectAtIndex:0] toName];
         }else{ //Else we know that the text in the cell should be fromName
-            name = [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] objectAtIndex:0] fromName];
+            name = [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:index] objectAtIndex:0] fromName];
         }
+        //Find out which color to put on the text
+        
         BOOL app = YES;
+        
         for (int i = 0; i < [[_debtsToPerson objectAtIndex:indexPath.row] count]; i++) {
             for (int j = 0; j < [[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] count]; j++) {
                 //NSLog([[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] approved] ? @"Yes" : @"No");
@@ -77,12 +79,11 @@
                     break;
                 }
             }
-            
             if (!app) {
                 NSLog(@"breakar.........");
                 break;
             }
-        }*/
+        }
         if (app) {
             cell.textLabel.textColor  = [UIColor colorWithRed:11.0/255.0 green:96.0/255.0 blue:254.0/255.0 alpha:1];
         }else{
@@ -116,8 +117,8 @@
  */
 
 - (void) fetchDeptsForUser{
-    
     PFQuery *toMe = [PFQuery queryWithClassName:@"Debts"];
+    //TODO: IMPORTANT!!!!!!! What if PFUser is NULL? 
     [toMe whereKey:@"toFbId" equalTo:[[PFUser currentUser] objectForKey:@"fbId"]];
 
     PFQuery *fromMe = [PFQuery queryWithClassName:@"Debts"];
@@ -158,8 +159,8 @@
                 }
               
             }
-            NSLog(@"_uniqueFbIds har nu storleken: %lu ", (unsigned long)[_uniqueFbIds count]);
-            NSLog(@"_depts har nu storleken: %lu ", (unsigned long)[_debts count]);
+            //NSLog(@"_uniqueFbIds har nu storleken: %lu ", (unsigned long)[_uniqueFbIds count]);
+            //NSLog(@"_depts har nu storleken: %lu ", (unsigned long)[_debts count]);
             if ([_uniqueFbIds count] > 0) { // We have depts.. Do the processing for them and show tableview..
                 self.showDeptsTableView.hidden = NO;
                 [self sortDepts];
@@ -199,7 +200,7 @@
         NSString *attributeName2  = @"fromFbId";
         NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"%K like %@",attributeName2, attributeValue];
         [arr addObject:[_debts filteredArrayUsingPredicate:predicate2]];
-        NSLog(@"Storlekten på arr: %lu", (unsigned long)[arr count]);
+        //NSLog(@"Storlekten på arr: %lu", (unsigned long)[arr count]);
         if ([[arr objectAtIndex:0] count] == 0) {
             NSLog(@"Index 0 har storleken 0");
         }

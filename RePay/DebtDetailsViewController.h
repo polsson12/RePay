@@ -10,8 +10,14 @@
 
 
 
-@interface DebtDetailsViewController : UIViewController
+@interface DebtDetailsViewController : UIViewController<UITableViewDataSource, UITabBarDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *debtDetailsTableView;
 @property (strong, nonatomic) NSMutableArray* debts;
+@property (weak, nonatomic) IBOutlet UILabel *differanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+
+- (void) calculateAmount;
 
 @end

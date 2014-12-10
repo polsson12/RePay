@@ -19,10 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    /*FBLoginView *loginView = [[FBLoginView alloc] init];
-    loginView.center = self.view.center;
-    [self.view addSubview:loginView];
-     */
+    NSLog(@"ndjsandjsandjnasjdnaskdknndkasndölklndsklnfskdnfkdsnk");
     if ([PFUser currentUser] && // Check if user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
         [self pushFirstViewController];
@@ -48,7 +45,7 @@
     //TODO: Fix the correct permissions...
     //NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
     NSArray *permissionsArray = @[@"public_profile", @"user_friends"];
-
+    
     // Login PFUser using Facebook
     
     
@@ -81,8 +78,8 @@
                         [[PFUser currentUser] setObject:[result objectForKey:@"id"] forKey:@"fbId"];
                         [[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"fbName"];
                         /*
-                        NSString *name = [result objectForKey:@"name"];
-                        NSLog(@"Användarens facebook namn:%@ ", name);
+                         NSString *name = [result objectForKey:@"name"];
+                         NSLog(@"Användarens facebook namn:%@ ", name);
                          */
                         [[PFUser currentUser] saveInBackground];
                     }else{
@@ -106,12 +103,12 @@
     FirstViewController *firstController = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstViewController"];
     
     [self.navigationController pushViewController:firstController animated:YES];
-
+    
 }
 
 - (void)addUserToDatabase{
     
-
+    
 }
 
 
