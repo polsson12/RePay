@@ -48,6 +48,7 @@
 @property (strong, nonatomic) NSMutableArray *debts;
 @property (strong, nonatomic) NSMutableArray *debtsToPerson;
 @property (strong, nonatomic) NSMutableArray *uniqueFbIds;
+@property (weak, nonatomic) IBOutlet UILabel *totalAmountLabel;
 
 
 

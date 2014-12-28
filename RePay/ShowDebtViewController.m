@@ -25,7 +25,13 @@
 
 - (void)viewDidLoad {
 
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
     //Fetch depts..
+    //TODO: Might be buggy if a user is fast enough to click here if one have deleted all the debts in DebtsDetailsViewController
+    //and comes back here...
     self.showDeptsTableView.hidden = YES;
     _debts = nil;
     [self fetchDeptsForUser];
@@ -56,6 +62,7 @@
     if (tableView == _showDeptsTableView) {
         NSString* name;
         NSInteger index = 0;
+        UILabel *amountLabel = (UILabel *)[cell viewWithTag:1];
         if([[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] count] == 0){
             NSLog(@"Kommer hit.........");
             index = 1;
@@ -71,12 +78,15 @@
         
         BOOL app = YES;
         
+        NSNumber* amount = @(0);
         for (int i = 0; i < [[_debtsToPerson objectAtIndex:indexPath.row] count]; i++) {
             for (int j = 0; j < [[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] count]; j++) {
                 //NSLog([[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] approved] ? @"Yes" : @"No");
+                amount = [NSNumber numberWithFloat:([[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] amount] floatValue]  + [amount floatValue])];
+
                 if(![[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] approved]){
                     app = NO;
-                    break;
+                    //break;
                 }
             }
             if (!app) {
@@ -86,11 +96,14 @@
         }
         if (app) {
             cell.textLabel.textColor  = [UIColor colorWithRed:11.0/255.0 green:96.0/255.0 blue:254.0/255.0 alpha:1];
+            amountLabel.textColor = [UIColor colorWithRed:11.0/255.0 green:96.0/255.0 blue:254.0/255.0 alpha:1];
         }else{
             cell.textLabel.textColor  = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+            amountLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+
         }
         cell.textLabel.text = name;
-
+        amountLabel.text = [amount stringValue];
     }
     
     return cell;
@@ -137,6 +150,7 @@
             _debts = [NSMutableArray arrayWithCapacity:objects.count];
             
             _uniqueFbIds = [[NSMutableArray alloc] init];
+            //TODO: save as PFObject instead? This might be unnessesary....
             for (PFObject *object in objects) {
                 Debt* d = [[Debt alloc] init];
                 d.fromName = object [@"fromName"];
@@ -147,6 +161,7 @@
                 d.amount = object [@"amount"];
                 d.approved = [object [@"approved"] boolValue];
                 d.createdAt = [object createdAt];
+                d.objectId = [object objectId];
                 [_debts addObject:d];
                 //NSLog(d.approved ? @"Yes" : @"No");
 
@@ -193,13 +208,15 @@
         NSString *attributeValue = [_uniqueFbIds objectAtIndex:i];
         
         //Debts from me to someone else with fbId: attributeValue
+        //Need to make the array returned from the predicate filter to __NSM for purposes in DebtDetailsViewController.
         NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"%K like %@",attributeName1 , attributeValue];
-        [arr addObject:[_debts filteredArrayUsingPredicate:predicate1]];
+        [arr addObject:[NSMutableArray arrayWithArray:[_debts filteredArrayUsingPredicate:predicate1]]];
         
         //Debts to me from someone else with fbId: attributeValue
         NSString *attributeName2  = @"fromFbId";
+        //Need to make the array returned from the predicate filter to __NSM for purposes in DebtDetailsViewController.
         NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"%K like %@",attributeName2, attributeValue];
-        [arr addObject:[_debts filteredArrayUsingPredicate:predicate2]];
+        [arr addObject:[NSMutableArray arrayWithArray:[_debts filteredArrayUsingPredicate:predicate2]]];
         //NSLog(@"Storlekten på arr: %lu", (unsigned long)[arr count]);
         if ([[arr objectAtIndex:0] count] == 0) {
             NSLog(@"Index 0 har storleken 0");

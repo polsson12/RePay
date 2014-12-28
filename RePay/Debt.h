@@ -17,5 +17,6 @@
 @property NSNumber* amount;
 @property BOOL      approved;
 @property NSDate*   createdAt;
+@property NSString* objectId;
 
 @end

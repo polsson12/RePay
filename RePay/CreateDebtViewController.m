@@ -24,16 +24,40 @@
     
     self.searchResultTableView.hidden = YES;
     
-    
+    //Message
     self.Message.layer.borderColor = [[UIColor grayColor] CGColor];
     self.Message.layer.borderWidth = 1.0;
     self.Message.layer.cornerRadius = 8;
     
-    self.Amount.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.Amount.layer.borderWidth = 1.0;
-    self.Amount.layer.cornerRadius = 8;
+    //Amount
+   // self.Amount.layer.borderColor = [[UIColor grayColor] CGColor];
+   // self.Amount.layer.borderWidth = 1.0;
+    //self.Amount.layer.cornerRadius = 8;
     
     self.sendToPerson = nil;
+    
+    //To Person
+    //self.DeptToPerson.layer.cornerRadius = 5.0f;
+    //self.DeptToPerson.masksToBounds = NO;
+    self.DeptToPerson.layer.borderWidth = .5f;
+    //self.DeptToPerson.layer.backgroundColor = [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:0.3].CGColor;
+    
+    //self.DeptToPerson.layer.shadowColor = [UIColor orangeColor].CGColor;
+    //self.DeptToPerson.layer.shadowOpacity = 0.4;
+    //self.DeptToPerson.layer.shadowRadius = 5.0f;
+    
+    
+    
+    //View controller background
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     [self getAllFbFriendsOfUserUsingApp];
 }
