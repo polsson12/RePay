@@ -31,14 +31,22 @@
 @end
 
 
-@interface CreateDebtViewController :UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIAlertViewDelegate>
+@interface CreateDebtViewController :UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIAlertViewDelegate, UITextFieldDelegate>
+
+//Depricated
+/*
 @property (weak, nonatomic) IBOutlet UILabel *DeptToPerson;
 
 @property (weak, nonatomic) IBOutlet UITextView *Message;
 @property (weak, nonatomic) IBOutlet UITextField *Amount;
+*/
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 #pragma mark CreateDebt ViewController
 @property (weak, nonatomic) IBOutlet UITableView *searchResultTableView;
+@property (weak, nonatomic) IBOutlet UITableView *informationTableView;
+
 
 
 @property (strong, nonatomic) NSMutableArray *friendIds; //Depricated
@@ -47,6 +55,11 @@
 
 @property (strong, nonatomic) NSArray *searchResults;
 @property (strong, nonatomic) Person *sendToPerson;
+
+@property (strong, nonatomic) NSString *toName;
+
+@property (strong, nonatomic) UITextField *activeKeyboard;
+
 
 
 - (IBAction)dissMissKeyboardOnTap:(id)sender;

@@ -76,8 +76,7 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Kommer hit...1");
-    //NSLog(@"Inne i cell for row at index path");
+   
     static NSString *cellID = @"UITableViewDetailsCell";
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     // dequeue a table view cell
@@ -97,12 +96,12 @@
     [formatter setDateFormat:@"MM/dd"];
     
     
-    // set its author label (tag #2)
+    // set message label (tag #2)
     UILabel *message = (UILabel *)[cell viewWithTag:2];
     date.numberOfLines = 0; //will wrap text in new line
     [date sizeToFit];
     
-    // set its publication date label (tag #3)
+    // set its amount label (tag #3)
     UILabel *amount = (UILabel *)[cell viewWithTag:3];
     date.numberOfLines = 0; //will wrap text in new line
     [date sizeToFit];
