@@ -12,32 +12,6 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "Debt.h"
 
-/*
-@interface Debt : NSObject
-@property NSString* fromName;
-@property NSString* fromFbId;
-@property NSString* message;
-@property NSString* toName;
-@property NSString* toFbId;
-@property NSNumber* amount;
-@property BOOL      approved;
-@property NSDate*   createdAt;
-
-@end
-
-@implementation Debt
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        //TODO: what here? if anything at al?
-    }
-    return self;
-}
-
-@end
-*/
 
 @interface ShowDebtViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate>
 
@@ -49,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *debtsToPerson;
 @property (strong, nonatomic) NSMutableArray *uniqueFbIds;
 @property (weak, nonatomic) IBOutlet UILabel *totalAmountLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 

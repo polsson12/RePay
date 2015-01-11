@@ -19,13 +19,12 @@
 @synthesize debts = _debts;
 @synthesize debtsToPerson = _debtsToPerson;
 @synthesize uniqueFbIds = _uniqueFbIds;
-
+@synthesize activityIndicator = _activityIndicator;
 
 
 
 - (void)viewDidLoad {
-
-    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Skulder" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -33,6 +32,7 @@
     //TODO: Might be buggy if a user is fast enough to click here if one have deleted all the debts in DebtsDetailsViewController
     //and comes back here...
     self.showDeptsTableView.hidden = YES;
+    _activityIndicator.hidden = YES;
     _debts = nil;
     [self fetchDeptsForUser];
 }
@@ -62,7 +62,14 @@
     if (tableView == _showDeptsTableView) {
         NSString* name;
         NSInteger index = 0;
+        
         UILabel *amountLabel = (UILabel *)[cell viewWithTag:1];
+        UILabel *numOfunApproved = (UILabel *)[cell viewWithTag:2];
+        numOfunApproved.hidden = YES;
+        numOfunApproved.layer.masksToBounds = YES;
+        numOfunApproved.layer.cornerRadius = 9;
+        
+        
         if([[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] count] == 0){
             NSLog(@"Kommer hit.........");
             index = 1;
@@ -79,13 +86,46 @@
         BOOL app = YES;
         
         NSNumber* amount = @(0);
-        for (int i = 0; i < [[_debtsToPerson objectAtIndex:indexPath.row] count]; i++) {
+        NSInteger numNonApp = 0;
+        
+
+        
+        
+        for (int i = 0; i < [[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] count]; i++) {
+            NSLog(@"Amount %@", [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] objectAtIndex:i] amount]);
+            amount = [NSNumber numberWithFloat:([[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:0] objectAtIndex:i] amount] floatValue]  + [amount floatValue])];
+        }
+        
+        for (int i = 0; i < [[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:1] count]; i++) {
+            NSLog(@"Amount %@", [[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:1] objectAtIndex:i] amount] );
+            amount = [NSNumber numberWithFloat:([amount floatValue]-[[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:1] objectAtIndex:i] amount] floatValue]) ];
+            if (![[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:1] objectAtIndex:i] approved]) {
+                numNonApp ++;
+            }
+        }
+        
+        if (numNonApp > 0) {
+            numOfunApproved.hidden = NO;
+            if (numNonApp > 10) {
+                numOfunApproved.text = @"10+";
+            }
+            else{
+                numOfunApproved.text =  [NSString stringWithFormat: @"%ld", (long)numNonApp];
+            }
+            }
+        
+        
+        
+        
+        //NSNumber* amount = @(0);
+        
+        /*for (int i = 0; i < [[_debtsToPerson objectAtIndex:indexPath.row] count]; i++) {
             for (int j = 0; j < [[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] count]; j++) {
                 //NSLog([[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] approved] ? @"Yes" : @"No");
                 amount = [NSNumber numberWithFloat:([[[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] amount] floatValue]  + [amount floatValue])];
-
+                NSLog(@"AMOUNT: %@", amount);
                 if(![[[[_debtsToPerson objectAtIndex:indexPath.row] objectAtIndex:i] objectAtIndex:j] approved]){
-                    app = NO;
+                    //app = NO;
                     //break;
                 }
             }
@@ -93,7 +133,7 @@
                 NSLog(@"breakar.........");
                 break;
             }
-        }
+        }*/
         if (app) {
             cell.textLabel.textColor  = [UIColor colorWithRed:11.0/255.0 green:96.0/255.0 blue:254.0/255.0 alpha:1];
             amountLabel.textColor = [UIColor colorWithRed:11.0/255.0 green:96.0/255.0 blue:254.0/255.0 alpha:1];
@@ -138,13 +178,15 @@
     [fromMe whereKey:@"fromFbId" equalTo:[[PFUser currentUser] objectForKey:@"fbId"]];
 
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[toMe,fromMe]];
-
+    [query orderByDescending:@"createdAt"];
     
     NSLog(@"User fbId: %@",[[PFUser currentUser] objectForKey:@"fbId"]);
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
+            [_activityIndicator stopAnimating];
+            _activityIndicator.hidden = YES;
             NSLog(@"Successfully retrieved %lu objects.", (unsigned long)objects.count);
 
             _debts = [NSMutableArray arrayWithCapacity:objects.count];
@@ -193,9 +235,20 @@
         } else {
             //TODO: No internet connection?
             // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            NSLog(@"KOMER HITKOMER HITKOMER HITKOMER HITKOMER HITKOMER HITKOMER HITKOMER HITKOMER HIT");
+            NSLog(@"Error123: %@ %@", error, [error userInfo]);
+            [_activityIndicator stopAnimating];
+            _activityIndicator.hidden = YES;
+            [self.navigationController popViewControllerAnimated:YES];
+            UIAlertView *error = [[UIAlertView alloc]
+                                  initWithTitle:@"Fel inträffade" message:@"Ett fel inträffade, kontrollera din internet anslutning eller försök igen senare." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [error show];
         }
     }];
+    _activityIndicator.hidden = NO;
+    [_activityIndicator startAnimating];
+    
 }
 
 - (void) sortDepts{

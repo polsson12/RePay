@@ -17,10 +17,8 @@
 
 @implementation CreateDebtViewController
 
-@synthesize friendIds = _friendIds; //Depricated
-@synthesize friendNames = _friendNames; //Depricated
 @synthesize friendInfo = _friendInfo;
-
+@synthesize activityIndicator = _activityIndicator;
 - (void)viewDidLoad {
     NSLog(@"view did load...");
     
@@ -32,6 +30,11 @@
     
     self.sendToPerson = nil;
     _toName = @"";
+    _friendInfo = nil;
+    
+    _activityIndicator.hidden = YES;
+
+    
     
     
     [self getAllFbFriendsOfUserUsingApp];
@@ -130,10 +133,11 @@
      }*/
 
 
-    
     //TODO: Fix so that if a person denied permission when logging in, make a call to re-approve permission
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
+            [_activityIndicator stopAnimating];
+            _activityIndicator.hidden = YES;
             // result will contain an array with your user's friends in the "data" key
             NSArray *friendObjects = [result objectForKey:@"data"];
 
@@ -157,7 +161,19 @@
             _searchResults = _friendInfo;
             [_searchResultTableView reloadData];
         }
+        else{ //handle error
+           // NSLog(@"MEGA ERROR:%@", error.domain);
+            [_activityIndicator stopAnimating];
+            _activityIndicator.hidden = YES;
+            [self.navigationController popViewControllerAnimated:YES];
+            UIAlertView *error = [[UIAlertView alloc]
+                                         initWithTitle:@"Fel inträffade" message:@"Ett fel inträffade, kontrollera din internet anslutning eller försök igen senare." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [error show];
+        }
     }];
+    _activityIndicator.hidden = NO;
+    [_activityIndicator startAnimating];
 }
 
 #pragma mark table view methods
@@ -280,7 +296,7 @@
             [_informationTableView setSeparatorColor:bgC];
             cell.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(cell.frame)/2, 0, CGRectGetWidth(cell.frame)/2);
             cell.backgroundColor = bgC;
-            //_informationTableView.backgroundColor = UIColor colorWithRed: green:<#(CGFloat)#> blue:<#(CGFloat)#> alpha:<#(CGFloat)#>
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }
 
@@ -542,8 +558,24 @@
 }
 
 - (IBAction)sendDebtButton:(id)sender {
-    
-    NSLog(@"bajs");
+    if ([self controlInfo]) {
+        //Send debt to database..
+        NSArray *cells = [_informationTableView visibleCells];
+        UILabel *name = (UILabel *)[[cells objectAtIndex:0] viewWithTag:5];
+        NSString * toPerson = @"Vill du skicka till personen: ";
+        NSString * mess = [toPerson stringByAppendingString:name.text];
+        UITextField *debtMess = (UITextField *)[[cells objectAtIndex:2] viewWithTag:4];
+        
+        if ([debtMess.text isEqualToString:@""]) {
+            mess = [mess stringByAppendingString:@", utan något meddelande?"];
+        }
+        else{
+            mess = [mess stringByAppendingString:@"?"];
+        }
+        UIAlertView *confirm = [[UIAlertView alloc]
+                                initWithTitle:@"Bekräfta skulden" message:mess delegate:self cancelButtonTitle:@"Nej" otherButtonTitles:@"Ja",nil];
+        [confirm show];
+    }
 }
 
 

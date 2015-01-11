@@ -15,8 +15,8 @@
 
 @interface LoginViewController : UIViewController
 
-- (void)pushFirstViewController;
-- (void)addUserToDatabase;
+//- (void)pushFirstViewController;
+//- (void)addUserToDatabase;
 
 @end
 

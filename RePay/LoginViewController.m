@@ -22,7 +22,9 @@
     NSLog(@"ndjsandjsandjnasjdnaskdknndkasndölklndsklnfskdnfkdsnk");
     if ([PFUser currentUser] && // Check if user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
-        [self pushFirstViewController];
+        //[self pushFirstViewController];
+        [self performSegueWithIdentifier:@"toFirstView" sender:self];
+
     }
 }
 
@@ -31,9 +33,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated {
     //TODO: Better fix for this??
     self.navigationController.navigationBar.topItem.title = @"RePay";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logga ut" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
+    //[self.navigationController.navigationBar.backItem setTitle:@"Logga ut"];
+    //self.navigationItem.backBarButtonItem.title = @"Logga ut";
 }
 
 
@@ -91,25 +96,32 @@
             } else {
                 NSLog(@"User with facebook logged in!");
             }
-            [self pushFirstViewController];
+            [self performSegueWithIdentifier:@"toFirstView" sender:self];
+            //[self pushFirstViewController];
         }
     }];
     
     //[_activityIndicator startAnimating]; // Show loading indicator until login is finished
 }
 
-- (void)pushFirstViewController {
+/*- (void)pushFirstViewController {
     //TODO: Make transistion smoother??
     FirstViewController *firstController = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstViewController"];
     
     [self.navigationController pushViewController:firstController animated:YES];
     
+}*/
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"toFirstView"]) {
+        FirstViewController *firstView = [segue destinationViewController];        
+    }
 }
 
-- (void)addUserToDatabase{
+/*- (void)addUserToDatabase{
     
     
-}
+}*/
 
 
 @end

@@ -10,6 +10,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <QuartzCore/QuartzCore.h>
+
 
 /*@interface UIViewController (FirstViewController)
 
@@ -22,5 +24,6 @@
 @property (strong, nonatomic) PFUser *user;
 @property (weak, nonatomic) IBOutlet UIButton *CreateDebt;
 @property (weak, nonatomic) IBOutlet UIButton *ShowDebt;
+@property (weak, nonatomic) IBOutlet UILabel *numOfNewDetps;
 
 @end

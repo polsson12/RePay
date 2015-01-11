@@ -10,12 +10,15 @@
 
 
 
-@interface DebtDetailsViewController : UIViewController<UITableViewDataSource, UITabBarDelegate>
+@interface DebtDetailsViewController : UIViewController<UITableViewDataSource, UITabBarDelegate, UIAlertViewDelegate>{
+    NSInteger selectedRow;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *debtDetailsTableView;
-@property (strong, nonatomic) NSMutableArray* debts;
+@property (strong, atomic) NSMutableArray* debts;
 @property (weak, nonatomic) IBOutlet UILabel *differanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 
 
 - (void) calculateAmount;

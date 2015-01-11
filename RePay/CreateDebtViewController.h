@@ -33,24 +33,12 @@
 
 @interface CreateDebtViewController :UIViewController<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
-//Depricated
-/*
-@property (weak, nonatomic) IBOutlet UILabel *DeptToPerson;
-
-@property (weak, nonatomic) IBOutlet UITextView *Message;
-@property (weak, nonatomic) IBOutlet UITextField *Amount;
-*/
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 #pragma mark CreateDebt ViewController
 @property (weak, nonatomic) IBOutlet UITableView *searchResultTableView;
 @property (weak, nonatomic) IBOutlet UITableView *informationTableView;
 
-
-
-@property (strong, nonatomic) NSMutableArray *friendIds; //Depricated
-@property (strong, nonatomic) NSMutableArray *friendNames; //Depricated
 @property (strong, nonatomic) NSMutableArray *friendInfo;
 
 @property (strong, nonatomic) NSArray *searchResults;
@@ -60,6 +48,7 @@
 
 @property (strong, nonatomic) UITextField *activeKeyboard;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 - (IBAction)dissMissKeyboardOnTap:(id)sender;
