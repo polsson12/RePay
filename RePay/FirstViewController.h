@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <QuartzCore/QuartzCore.h>
+#import "infoOneViewController.h"
 
 
 /*@interface UIViewController (FirstViewController)

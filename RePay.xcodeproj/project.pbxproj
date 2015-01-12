@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41564DC1A62D2A000C18302 /* infoOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41564DB1A62D2A000C18302 /* infoOneViewController.m */; };
 		D43BD85F1A23DE8000BE5C9A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD85D1A23DE8000BE5C9A /* Bolts.framework */; };
 		D43BD8601A23DE8000BE5C9A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD85E1A23DE8000BE5C9A /* Parse.framework */; };
 		D43BD8621A23DEA100BE5C9A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD8611A23DEA100BE5C9A /* Accounts.framework */; };
@@ -49,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		D41391D21A2411490049DB35 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		D41564DA1A62D2A000C18302 /* infoOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infoOneViewController.h; sourceTree = "<group>"; };
+		D41564DB1A62D2A000C18302 /* infoOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoOneViewController.m; sourceTree = "<group>"; };
 		D43BD85D1A23DE8000BE5C9A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D43BD85E1A23DE8000BE5C9A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D43BD8611A23DEA100BE5C9A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -158,6 +161,8 @@
 				D4D1B7AE1A35BD9D00E18AB8 /* ShowDebtViewController.m */,
 				D41391D21A2411490049DB35 /* FirstViewController.h */,
 				D451B8A71A2414B80066C326 /* FirstViewController.m */,
+				D41564DA1A62D2A000C18302 /* infoOneViewController.h */,
+				D41564DB1A62D2A000C18302 /* infoOneViewController.m */,
 				D4875B271A37B04E00993BBD /* Debt.h */,
 				D4875B281A37B04E00993BBD /* Debt.m */,
 				D43E2D071A23D11D009381B7 /* Images.xcassets */,
@@ -320,6 +325,7 @@
 				D44A7E431A2E72A400693022 /* CreateDebtViewController.m in Sources */,
 				D4D1B7AF1A35BD9D00E18AB8 /* ShowDebtViewController.m in Sources */,
 				D4875B261A379E9900993BBD /* DebtDetailsViewController.m in Sources */,
+				D41564DC1A62D2A000C18302 /* infoOneViewController.m in Sources */,
 				D4C518EB1A241589002B82CA /* FirstViewController.m in Sources */,
 				D4875B291A37B04E00993BBD /* Debt.m in Sources */,
 				D43E2D031A23D11D009381B7 /* LoginViewController.m in Sources */,

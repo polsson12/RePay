@@ -18,13 +18,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _loginButton.layer.cornerRadius = 6;
     // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"ndjsandjsandjnasjdnaskdknndkasndölklndsklnfskdnfkdsnk");
+    //PFUser *user = [PFUser currentUser];
+   // user = nil;
+    //[PFUser logOut];
     if ([PFUser currentUser] && // Check if user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
         //[self pushFirstViewController];
-        [self performSegueWithIdentifier:@"toFirstView" sender:self];
-
+        if ([[PFUser currentUser] objectForKey:@"fbId"] && [[PFUser currentUser] objectForKey:@"fbName"]) {
+            [self performSegueWithIdentifier:@"toFirstView" sender:self];
+        }else{
+            [PFUser logOut];
+            NSLog(@"Någonting hände...Loggar ut användaren..");
+        }
+       
+        
+        NSLog(@"KOMMER HIT xD xD xD ");
+        NSLog(@"cached current user facebook ID: %@", [[PFUser currentUser] objectForKey:@"fbName"]);
     }
 }
 
@@ -76,27 +88,40 @@
         } else {
             if (user.isNew) {
                 NSLog(@"New user with facebook signed up and logged in!");
-                //TODO: Put user in user database
+
                 [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                     if (!error) {
                         // Store the current user's Facebook ID on the user
-                        [[PFUser currentUser] setObject:[result objectForKey:@"id"] forKey:@"fbId"];
-                        [[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"fbName"];
-                        /*
-                         NSString *name = [result objectForKey:@"name"];
-                         NSLog(@"Användarens facebook namn:%@ ", name);
-                         */
-                        [[PFUser currentUser] saveInBackground];
-                    }else{
+                        //[[PFUser currentUser] setObject:[result objectForKey:@"id"] forKey:@"fbId"];
+                        //[[PFUser currentUser] setObject:[result objectForKey:@"name"] forKey:@"fbName"];
+                        PFUser *user = [PFUser currentUser];
+                        user[@"fbId"] = [result objectForKey:@"id"];
+                        user[@"fbName"] = [result objectForKey:@"name"];
+                       NSLog(@"1current user facebook ID: %@", [[PFUser currentUser] objectForKey:@"fbId"]);
+                       // NSLog(@"1current user facebook ID: %@", [[PFUser currentUser] objectForKey:@"fbId"]);
+                        //[[PFUser currentUser] saveInBackground];
+                        [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
+                            if (succeeded) {
+                                [self performSegueWithIdentifier:@"toFirstView" sender:self];
+                            }
+                            else {
+                                //TODO: Error handling for when trying to save the data..
+                            }
+                        }];
+                        
+                    }
+                    else{
                         //TODO: Error handler here???
                         NSLog(@"Error when trying to get fbId with new user..");
                     }
                 }];
                 
             } else {
+                [self performSegueWithIdentifier:@"toFirstView" sender:self];
                 NSLog(@"User with facebook logged in!");
+                NSLog(@"2current user facebook ID: %@", [[PFUser currentUser] objectForKey:@"fbId"]);
+
             }
-            [self performSegueWithIdentifier:@"toFirstView" sender:self];
             //[self pushFirstViewController];
         }
     }];

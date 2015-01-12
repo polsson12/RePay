@@ -17,6 +17,7 @@
 
 //- (void)pushFirstViewController;
 //- (void)addUserToDatabase;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
