@@ -24,7 +24,7 @@
 
 //Delete user button
 - (IBAction)deleteUserButton:(id)sender {
-    //TODO: Makes this right and delte objects associated with the user..
+    //TODO: Makes this right and delete objects associated with the user..
     
     
     [FBRequestConnection startWithGraphPath:@"/me/permissions"
