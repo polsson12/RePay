@@ -30,8 +30,11 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     _CreateDebt.layer.cornerRadius = 6;
+    _CreateDebt.layer.shadowOpacity = 0.3;
+
     //_CreateDebt.layer.borderWidth = 1;
     _ShowDebt.layer.cornerRadius = 6;
+    _ShowDebt.layer.shadowOpacity = 0.3;
     //_ShowDebt.layer.borderWidth = 1;
     //_CreateDebt.layer.borderColor = [UIColor blueColor].CGColor;
     //[[UIBarButtonItem alloc] initWithTitle:@"Logga ut" style:UIBarButtonItemStylePlain target:nil action:nil];

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D41564DC1A62D2A000C18302 /* infoOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41564DB1A62D2A000C18302 /* infoOneViewController.m */; };
+		D4194F741A643DE100E580DB /* logga kalle 3.png in Resources */ = {isa = PBXBuildFile; fileRef = D4194F731A643DE100E580DB /* logga kalle 3.png */; };
 		D43BD85F1A23DE8000BE5C9A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD85D1A23DE8000BE5C9A /* Bolts.framework */; };
 		D43BD8601A23DE8000BE5C9A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD85E1A23DE8000BE5C9A /* Parse.framework */; };
 		D43BD8621A23DEA100BE5C9A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BD8611A23DEA100BE5C9A /* Accounts.framework */; };
@@ -52,6 +53,7 @@
 		D41391D21A2411490049DB35 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		D41564DA1A62D2A000C18302 /* infoOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infoOneViewController.h; sourceTree = "<group>"; };
 		D41564DB1A62D2A000C18302 /* infoOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoOneViewController.m; sourceTree = "<group>"; };
+		D4194F731A643DE100E580DB /* logga kalle 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logga kalle 3.png"; sourceTree = "<group>"; };
 		D43BD85D1A23DE8000BE5C9A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D43BD85E1A23DE8000BE5C9A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D43BD8611A23DEA100BE5C9A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -175,6 +177,7 @@
 		D43E2CFA1A23D11D009381B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4194F731A643DE100E580DB /* logga kalle 3.png */,
 				D43E2CFB1A23D11D009381B7 /* Info.plist */,
 				D43E2CFC1A23D11D009381B7 /* main.m */,
 			);
@@ -304,6 +307,7 @@
 			files = (
 				D43E2D061A23D11D009381B7 /* Main.storyboard in Resources */,
 				D43E2D0B1A23D11D009381B7 /* LaunchScreen.xib in Resources */,
+				D4194F741A643DE100E580DB /* logga kalle 3.png in Resources */,
 				D43E2D081A23D11D009381B7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

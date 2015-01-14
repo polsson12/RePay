@@ -20,6 +20,8 @@
     [super viewDidLoad];
     
     _loginButton.layer.cornerRadius = 6;
+    _loginButton.layer.shadowOpacity = 0.3;
+
     // Do any additional setup after loading the view, typically from a nib.
     //PFUser *user = [PFUser currentUser];
    // user = nil;
@@ -49,8 +51,6 @@
     //TODO: Better fix for this??
     self.navigationController.navigationBar.topItem.title = @"RePay";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logga ut" style:self.navigationItem.backBarButtonItem.style target:nil action:nil];
-    //[self.navigationController.navigationBar.backItem setTitle:@"Logga ut"];
-    //self.navigationItem.backBarButtonItem.title = @"Logga ut";
 }
 
 
